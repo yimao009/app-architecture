@@ -8,7 +8,9 @@ target 'MultiPattern' do
   use_frameworks!
 
   # Pods for MultiPattern
-pod 'CwlViews', '~> 0.1.0'
-pod 'CwlSignal', '~> 2.2.0'
-pod 'CwlUtils', '~> 2.2.0'
+  pod 'CwlViews', '~> 0.1.0'
+  pod 'CwlSignal', '~> 2.2.0'
+  pod 'CwlUtils', '~> 2.2.0'
+
+  pod 'SnapKit', '~> 5.0.1'
 end
