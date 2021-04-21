@@ -1,0 +1,27 @@
+PODS:
+  - CwlSignal (2.2.0):
+    - CwlUtils (~> 2.2.0)
+  - CwlUtils (2.2.0)
+  - CwlViews (0.1.0):
+    - CwlSignal (~> 2.2.0)
+    - CwlUtils (~> 2.2.0)
+
+DEPENDENCIES:
+  - CwlSignal (~> 2.2.0)
+  - CwlUtils (~> 2.2.0)
+  - CwlViews (~> 0.1.0)
+
+SPEC REPOS:
+  trunk:
+    - CwlSignal
+    - CwlUtils
+    - CwlViews
+
+SPEC CHECKSUMS:
+  CwlSignal: ec2a5c2646588270206f8289a0a56ab049464777
+  CwlUtils: dd7790c5b4c4ff32030755bf1eeb339992ac1623
+  CwlViews: 4053dc6e45ac2d6f099b0af11f2d0375fe55acfe
+
+PODFILE CHECKSUM: 1d06d6826dfe9f6e3caf8abf8028ee01a6d724aa
+
+COCOAPODS: 1.10.1
