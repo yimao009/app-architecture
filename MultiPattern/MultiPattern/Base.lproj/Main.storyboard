@@ -33,12 +33,16 @@
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5P1-LL-fGB">
                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="34"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EqT-nL-x44">
                                                         <rect key="frame" x="352" y="0.0" width="46" height="34"/>
                                                         <state key="normal" title="Button"/>
+                                                        <connections>
+                                                            <action selector="mvcButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="sBr-ph-Ios"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.8980392157" green="0.90588235289999997" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -321,10 +325,14 @@
                             <constraint firstItem="15q-o7-6ic" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="yVl-gV-Huk"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mvcButton" destination="EqT-nL-x44" id="hOm-h4-GN2"/>
+                        <outlet property="mvcTextField" destination="5P1-LL-fGB" id="IJj-4m-qxW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1604" y="-185"/>
+            <point key="canvasLocation" x="-2380" y="-433"/>
         </scene>
     </scenes>
     <resources>
