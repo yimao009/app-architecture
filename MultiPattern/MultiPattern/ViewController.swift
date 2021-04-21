@@ -13,16 +13,20 @@ class ViewController: UIViewController {
     let model = Model(value: "initial value")
 
     @IBOutlet weak var mvcTextField: UITextField!
+    @IBOutlet weak var mvpTextField: UITextField!
     
     @IBOutlet weak var mvcButton: UIButton!
-
+    @IBOutlet weak var mvpButton: UIButton!
+    
     // Strong references
     var mvcObserver: NSObjectProtocol?
+    var presenter: ViewPresenter?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
         mvcDidLoad()
+        mvpDidLoad()
 
     }
 
@@ -46,6 +50,50 @@ extension ViewController {
     }
 }
 
+protocol ViewProtocol: class {
+    var textFiledValue: String { get set }
+}
+
+class ViewPresenter {
+    let model: Model
+    weak var view: ViewProtocol?
+    let observer: NSObjectProtocol
+
+    init(model: Model, view: ViewProtocol) {
+        self.model = model
+        self.view = view
+
+        view.textFiledValue = model.value
+        observer = NotificationCenter.default.addObserver(forName: Model.textDidChange, object: nil, queue: nil, using: { [view] (notif) in
+            view.textFiledValue = notif.userInfo?[Model.textKey] as? String ?? ""
+        })
+    }
+
+    func commit() {
+        model.value = view?.textFiledValue ?? ""
+    }
+}
+
+extension ViewController: ViewProtocol {
+
+    func mvpDidLoad() {
+        presenter = ViewPresenter(model: model, view: self)
+    }
+
+    @IBAction func mvpButtonPressed() {
+        presenter?.commit()
+    }
+
+    var textFiledValue: String {
+        get {
+            mvpTextField.text ?? ""
+        }
+        set {
+            mvpTextField.text = newValue
+        }
+    }
+
+}
 
 
 extension ViewController {
