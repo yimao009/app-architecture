@@ -95,7 +95,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.8980392157" green="0.90588235289999997" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caM-YQ-er3">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MVVM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caM-YQ-er3">
                                                 <rect key="frame" x="0.0" y="252" width="398" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -105,13 +105,16 @@
                                                 <rect key="frame" x="0.0" y="294" width="398" height="34"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yyN-5v-t0a">
-                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="34"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="336" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5g8-Zz-RAi">
-                                                        <rect key="frame" x="352" y="0.0" width="46" height="34"/>
-                                                        <state key="normal" title="Button"/>
+                                                        <rect key="frame" x="344" y="0.0" width="54" height="34"/>
+                                                        <state key="normal" title="Commit"/>
+                                                        <connections>
+                                                            <action selector="mvvmPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="561-f4-iMc"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.8980392157" green="0.90588235289999997" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -336,8 +339,10 @@
                         <outlet property="mvcTextField" destination="5P1-LL-fGB" id="IJj-4m-qxW"/>
                         <outlet property="mvpButton" destination="qNm-f8-b1Y" id="RIe-24-a8g"/>
                         <outlet property="mvpTextField" destination="qGz-Wh-kue" id="iGs-7y-dBf"/>
+                        <outlet property="mvvmButton" destination="5g8-Zz-RAi" id="hXt-Sb-h0A"/>
                         <outlet property="mvvmMinimalButton" destination="g6h-8i-f3N" id="15Y-Ok-maU"/>
                         <outlet property="mvvmMinimalTextField" destination="vDI-rp-jkx" id="RO2-25-5gw"/>
+                        <outlet property="mvvmTextField" destination="yyN-5v-t0a" id="KMp-Qz-GKo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

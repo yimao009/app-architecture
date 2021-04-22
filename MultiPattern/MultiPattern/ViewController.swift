@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SnapKit
+import CwlSignal
 
 class ViewController: UIViewController {
 
@@ -15,10 +15,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var mvcTextField: UITextField!
     @IBOutlet weak var mvpTextField: UITextField!
     @IBOutlet weak var mvvmMinimalTextField: UITextField!
+    @IBOutlet weak var mvvmTextField: UITextField!
 
     @IBOutlet weak var mvcButton: UIButton!
     @IBOutlet weak var mvpButton: UIButton!
     @IBOutlet weak var mvvmMinimalButton: UIButton!
+    @IBOutlet weak var mvvmButton: UIButton!
 
     // Strong references
     var mvcObserver: NSObjectProtocol?
@@ -27,6 +29,9 @@ class ViewController: UIViewController {
     var minimalViewModel: MinimalViewModel?
     var minimalObserval: NSObjectProtocol?
 
+    var viewModel: ViewModel?
+    var mvvmObserval: Cancellable?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -34,6 +39,7 @@ class ViewController: UIViewController {
         mvcDidLoad()
         mvpDidLoad()
         mvvmMinimalDidLoad()
+        mvvmDidLoad()
     }
 
 //    override func viewDidLayoutSubviews() {
@@ -134,6 +140,42 @@ extension ViewController {
     @IBAction func mvvmMinimalPressed() {
         minimalViewModel?.commit(value: mvvmMinimalTextField.text ?? "")
     }
+}
+
+// MVVM ---------------------------------------------------------
+
+class ViewModel {
+    let model: Model
+
+    init(model: Model) {
+        self.model = model
+    }
+
+    var textFieldValue: Signal<String> {
+        return Signal.notifications(name: Model.textDidChange)
+            .compactMap { note in
+                note.userInfo?[Model.textKey] as? String
+            }.continuous(initialValue: model.value)
+    }
+
+    func commit(value: String) {
+        model.value = value
+    }
+}
+
+extension ViewController {
+
+    func mvvmDidLoad() {
+        viewModel = ViewModel(model: model)
+        mvvmObserval = viewModel?.textFieldValue.subscribeValues({ [unowned self] (str) in
+            mvvmTextField.text = str
+        })
+    }
+
+    @IBAction func mvvmPressed() {
+        viewModel?.commit(value: mvvmTextField.text ?? "")
+    }
+
 }
 
 extension ViewController {
