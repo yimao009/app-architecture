@@ -14,20 +14,26 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var mvcTextField: UITextField!
     @IBOutlet weak var mvpTextField: UITextField!
-    
+    @IBOutlet weak var mvvmMinimalTextField: UITextField!
+
     @IBOutlet weak var mvcButton: UIButton!
     @IBOutlet weak var mvpButton: UIButton!
-    
+    @IBOutlet weak var mvvmMinimalButton: UIButton!
+
     // Strong references
     var mvcObserver: NSObjectProtocol?
     var presenter: ViewPresenter?
+
+    var minimalViewModel: MinimalViewModel?
+    var minimalObserval: NSObjectProtocol?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
         mvcDidLoad()
         mvpDidLoad()
-
+        mvvmMinimalDidLoad()
     }
 
 //    override func viewDidLayoutSubviews() {
@@ -95,6 +101,40 @@ extension ViewController: ViewProtocol {
 
 }
 
+// Minimal MVVM ---------------------------------------------------------
+
+class MinimalViewModel: NSObject {
+    let model: Model
+    var observer: NSObjectProtocol?
+    @objc dynamic var textFieldValue: String
+
+    init(model: Model) {
+        self.model = model
+        textFieldValue = model.value
+        super.init()
+        observer = NotificationCenter.default.addObserver(forName: Model.textDidChange, object: nil, queue: nil, using: { [weak self] (note) in
+            self?.textFieldValue = note.userInfo?[Model.textKey] as? String ?? ""
+        })
+    }
+
+    func commit(value: String) {
+        model.value = value
+    }
+}
+
+extension ViewController {
+    func mvvmMinimalDidLoad() {
+        minimalViewModel = MinimalViewModel(model: model)
+
+        minimalObserval = minimalViewModel?.observe(\.textFieldValue, options: [.initial, .new], changeHandler: { [weak self] (_, change) in
+            self?.mvvmMinimalTextField.text = change.newValue
+        })
+    }
+
+    @IBAction func mvvmMinimalPressed() {
+        minimalViewModel?.commit(value: mvvmMinimalTextField.text ?? "")
+    }
+}
 
 extension ViewController {
     func recoard() {
