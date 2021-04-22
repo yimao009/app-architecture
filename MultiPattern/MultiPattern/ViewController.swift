@@ -16,11 +16,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var mvpTextField: UITextField!
     @IBOutlet weak var mvvmMinimalTextField: UITextField!
     @IBOutlet weak var mvvmTextField: UITextField!
+    @IBOutlet weak var mvcViewStateTextField: UITextField!
+
 
     @IBOutlet weak var mvcButton: UIButton!
     @IBOutlet weak var mvpButton: UIButton!
     @IBOutlet weak var mvvmMinimalButton: UIButton!
     @IBOutlet weak var mvvmButton: UIButton!
+    @IBOutlet weak var mvcViewStateButton: UIButton!
 
     // Strong references
     var mvcObserver: NSObjectProtocol?
@@ -32,6 +35,10 @@ class ViewController: UIViewController {
     var viewModel: ViewModel?
     var mvvmObserval: Cancellable?
 
+    var viewState: ViewState?
+    var viewStateObserver: NSObjectProtocol?
+    var viewStateModelObserver: NSObjectProtocol?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -40,6 +47,7 @@ class ViewController: UIViewController {
         mvpDidLoad()
         mvvmMinimalDidLoad()
         mvvmDidLoad()
+        mvcvsDidLoad()
     }
 
 //    override func viewDidLayoutSubviews() {
@@ -176,6 +184,34 @@ extension ViewController {
         viewModel?.commit(value: mvvmTextField.text ?? "")
     }
 
+}
+
+// MVC + ViewState ---------------------------------------------------------
+
+class ViewState {
+    var textFieldValue: String = ""
+
+    init(textFieldValue: String) {
+        self.textFieldValue = textFieldValue
+    }
+
+}
+
+extension ViewController {
+    func mvcvsDidLoad() {
+        viewState = ViewState(textFieldValue: model.value)
+        mvcViewStateTextField.text = model.value
+        viewStateObserver = NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: mvcViewStateTextField, queue: nil) { [viewState] n in
+            viewState?.textFieldValue = (n.object as! UITextField).text ?? ""
+        }
+        viewStateModelObserver = NotificationCenter.default.addObserver(forName:Model.textDidChange, object: nil, queue: nil, using: { [mvcViewStateTextField] (n) in
+            mvcViewStateTextField?.text = n.userInfo?[Model.textKey] as? String
+        })
+    }
+
+    @IBAction func mvvmViewStatePressed() {
+        model.value = viewState?.textFieldValue ?? ""
+    }
 }
 
 extension ViewController {
