@@ -24,7 +24,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var mvvmMinimalButton: UIButton!
     @IBOutlet weak var mvvmButton: UIButton!
     @IBOutlet weak var mvcViewStateButton: UIButton!
-
+    
+    @IBOutlet weak var stackView: UIStackView!
+    
     // Strong references
     var mvcObserver: NSObjectProtocol?
     var presenter: ViewPresenter?
@@ -39,6 +41,11 @@ class ViewController: UIViewController {
     var viewStateObserver: NSObjectProtocol?
     var viewStateModelObserver: NSObjectProtocol?
 
+
+    var driver: Driver<ElmState, ElmState.Action>?
+
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -48,6 +55,7 @@ class ViewController: UIViewController {
         mvvmMinimalDidLoad()
         mvvmDidLoad()
         mvcvsDidLoad()
+        elmDidLoad()
     }
 
 //    override func viewDidLayoutSubviews() {
@@ -211,6 +219,64 @@ extension ViewController {
 
     @IBAction func mvvmViewStatePressed() {
         model.value = viewState?.textFieldValue ?? ""
+    }
+}
+
+// TEA ---------------------------------------------------------
+
+struct ElmState {
+    var text: String
+
+    enum Action {
+        case commit
+        case setText(String)
+        case modelNotification(Notification)
+    }
+
+    mutating func update(_ action: Action) -> Command<Action>? {
+        switch action {
+        case .setText(let text):
+            self.text = text
+            return nil
+        case .commit:
+            return .changeModelText(text)
+        case .modelNotification(let notification):
+            text = notification.userInfo?[Model.textKey] as? String ?? ""
+            return nil
+
+        }
+    }
+
+    var view: [ElmView<Action>] {
+        return [
+            ElmView.textFiled(text, onChange: Action.setText),
+            ElmView.button(title: "Commit", onTap: Action.commit)
+        ]
+    }
+
+    var subscriptions: [Subscription<Action>] {
+        return [
+            .notification(name: Model.textDidChange, Action.modelNotification)
+        ]
+    }
+}
+
+extension ViewController {
+    func elmDidLoad() {
+        driver = Driver(
+            ElmState(text: model.value),
+            update: { state, action in
+                state.update(action)
+            },
+            view: {
+                $0.view
+            },
+            subscriptions: {
+                $0.subscriptions
+
+            },
+            rootView: stackView,
+            model: model)
     }
 }
 

@@ -14,6 +14,7 @@
 		06622E27262C70FE00B03C4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06622E26262C70FE00B03C4A /* Assets.xcassets */; };
 		06622E2A262C70FE00B03C4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06622E28262C70FE00B03C4A /* LaunchScreen.storyboard */; };
 		0691EAF926305EE900ADB663 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0691EAF826305EE900ADB663 /* Model.swift */; };
+		0691EBBB2631D15600ADB663 /* Elm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0691EBBA2631D15600ADB663 /* Elm.swift */; };
 		2DF3B44C2ACF3D15FBB03EC0 /* Pods_MultiPattern.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A04D4F7558F689E36342F1 /* Pods_MultiPattern.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		06622E29262C70FE00B03C4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		06622E2B262C70FE00B03C4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0691EAF826305EE900ADB663 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		0691EBBA2631D15600ADB663 /* Elm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elm.swift; sourceTree = "<group>"; };
 		40760C135C2E5F40B1098572 /* Pods-MultiPattern.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiPattern.release.xcconfig"; path = "Target Support Files/Pods-MultiPattern/Pods-MultiPattern.release.xcconfig"; sourceTree = "<group>"; };
 		6CCEB8A413A563C7E1CE43A2 /* Pods-MultiPattern.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiPattern.debug.xcconfig"; path = "Target Support Files/Pods-MultiPattern/Pods-MultiPattern.debug.xcconfig"; sourceTree = "<group>"; };
 		D3A04D4F7558F689E36342F1 /* Pods_MultiPattern.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MultiPattern.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +70,7 @@
 				06622E1D262C70F900B03C4A /* AppDelegate.swift */,
 				06622E1F262C70F900B03C4A /* SceneDelegate.swift */,
 				06622E21262C70F900B03C4A /* ViewController.swift */,
+				0691EBBA2631D15600ADB663 /* Elm.swift */,
 				0691EAF826305EE900ADB663 /* Model.swift */,
 				06622E23262C70F900B03C4A /* Main.storyboard */,
 				06622E26262C70FE00B03C4A /* Assets.xcassets */,
@@ -209,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0691EBBB2631D15600ADB663 /* Elm.swift in Sources */,
 				06622E22262C70F900B03C4A /* ViewController.swift in Sources */,
 				06622E1E262C70F900B03C4A /* AppDelegate.swift in Sources */,
 				06622E20262C70F900B03C4A /* SceneDelegate.swift in Sources */,
